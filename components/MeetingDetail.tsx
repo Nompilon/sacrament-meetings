@@ -15,6 +15,7 @@ const typeLabels: Record<SacramentMeeting['meetingType'], string> = {
   testimony: 'Fast & Testimony Meeting',
   stake: 'Stake Meeting',
   general: 'General Conference',
+  special: 'Special Meeting',
 };
 
 function ProgramRow({

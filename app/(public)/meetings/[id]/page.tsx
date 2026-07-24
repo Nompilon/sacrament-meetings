@@ -1,8 +1,7 @@
 import { notFound } from 'next/navigation';
 import MeetingDetail from '@/components/MeetingDetail';
 import PrintButton from '@/components/PrintButton';
-import { getBaseUrl } from '@/lib/utils';
-import type { SacramentMeeting } from '@/lib/types';
+import { getMeetingById } from '@/lib/meetings-db';
 
 export default async function MeetingPage({
   params,
@@ -10,18 +9,17 @@ export default async function MeetingPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const baseUrl = await getBaseUrl();
-  const res = await fetch(`${baseUrl}/api/meetings/${id}`, { cache: 'no-store' });
+  const numericId = Number(id);
 
-  if (res.status === 404 || res.status === 400) {
+  if (!Number.isInteger(numericId)) {
     notFound();
   }
 
-  if (!res.ok) {
-    throw new Error('Failed to load meeting');
-  }
+  const meeting = await getMeetingById(numericId);
 
-  const meeting: SacramentMeeting = await res.json();
+  if (!meeting) {
+    notFound();
+  }
 
   return (
     <div>
