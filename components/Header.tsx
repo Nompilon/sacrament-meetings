@@ -20,6 +20,7 @@ export default function Header() {
             alt="Nompilo Ngwenya"
             width={40}
             height={40}
+            style={{ width: 'auto', height: 'auto' }}
             className="rounded-full object-cover"
           />
 

@@ -12,6 +12,7 @@ const merriweather = Merriweather({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://sacrament-meetings-rust.vercel.app/'),
   title: 'Sacrament Meeting Planner',
   description: 'Plan, manage, and print sacrament meeting programs.',
 };
