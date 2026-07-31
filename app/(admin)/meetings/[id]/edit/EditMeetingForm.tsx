@@ -1,14 +1,17 @@
 'use client';
-import { useActionState } from 'react';
-import { createMeeting } from '@/lib/actions';
-import { initialState } from '@/lib/validation';
 
-export default function NewMeetingPage() {
-  const [state, formAction, isPending] = useActionState(createMeeting, initialState);
+import { useActionState } from 'react';
+import { updateMeetingAction } from '@/lib/actions';
+import { initialState } from '@/lib/validation';
+import type { SacramentMeeting } from '@/lib/types';
+
+export default function EditMeetingForm({ meeting }: { meeting: SacramentMeeting }) {
+  const updateWithId = updateMeetingAction.bind(null, meeting.id);
+  const [state, formAction, isPending] = useActionState(updateWithId, initialState);
 
   return (
     <div className="mx-auto max-w-2xl">
-      <h1 className="mb-6 text-2xl font-bold text-slate-800">Create Meeting</h1>
+      <h1 className="mb-6 text-2xl font-bold text-slate-800">Edit Meeting</h1>
 
       <form action={formAction} className="space-y-4">
         <div>
@@ -19,6 +22,7 @@ export default function NewMeetingPage() {
             id="date"
             name="date"
             type="date"
+            defaultValue={meeting.date}
             aria-describedby="date-error"
             className="mt-1 w-full rounded-md border border-slate-300 px-3 py-2"
           />
@@ -34,6 +38,7 @@ export default function NewMeetingPage() {
           <select
             id="meetingType"
             name="meetingType"
+            defaultValue={meeting.meetingType}
             aria-describedby="meetingType-error"
             className="mt-1 w-full rounded-md border border-slate-300 px-3 py-2"
           >
@@ -56,6 +61,7 @@ export default function NewMeetingPage() {
             id="presiding"
             name="presiding"
             type="text"
+            defaultValue={meeting.presiding}
             aria-describedby="presiding-error"
             className="mt-1 w-full rounded-md border border-slate-300 px-3 py-2"
           />
@@ -72,6 +78,7 @@ export default function NewMeetingPage() {
             id="conducting"
             name="conducting"
             type="text"
+            defaultValue={meeting.conducting}
             aria-describedby="conducting-error"
             className="mt-1 w-full rounded-md border border-slate-300 px-3 py-2"
           />
@@ -91,6 +98,7 @@ export default function NewMeetingPage() {
                 id="openingHymnNumber"
                 name="openingHymnNumber"
                 type="number"
+                defaultValue={meeting.openingHymn.number}
                 aria-describedby="openingHymnNumber-error"
                 className="mt-1 w-full rounded-md border border-slate-300 px-3 py-2"
               />
@@ -103,16 +111,11 @@ export default function NewMeetingPage() {
                 id="openingHymnTitle"
                 name="openingHymnTitle"
                 type="text"
+                defaultValue={meeting.openingHymn.title}
                 aria-describedby="openingHymnTitle-error"
                 className="mt-1 w-full rounded-md border border-slate-300 px-3 py-2"
               />
             </div>
-          </div>
-          <div id="openingHymnNumber-error" aria-live="polite" className="mt-1 text-sm text-red-600">
-            {state.errors?.openingHymnNumber?.map((err) => <p key={err}>{err}</p>)}
-          </div>
-          <div id="openingHymnTitle-error" aria-live="polite" className="mt-1 text-sm text-red-600">
-            {state.errors?.openingHymnTitle?.map((err) => <p key={err}>{err}</p>)}
           </div>
         </fieldset>
 
@@ -124,6 +127,7 @@ export default function NewMeetingPage() {
             id="openingPrayer"
             name="openingPrayer"
             type="text"
+            defaultValue={meeting.openingPrayer}
             aria-describedby="openingPrayer-error"
             className="mt-1 w-full rounded-md border border-slate-300 px-3 py-2"
           />
@@ -143,6 +147,7 @@ export default function NewMeetingPage() {
                 id="sacramentHymnNumber"
                 name="sacramentHymnNumber"
                 type="number"
+                defaultValue={meeting.sacramentHymn.number}
                 aria-describedby="sacramentHymnNumber-error"
                 className="mt-1 w-full rounded-md border border-slate-300 px-3 py-2"
               />
@@ -155,16 +160,11 @@ export default function NewMeetingPage() {
                 id="sacramentHymnTitle"
                 name="sacramentHymnTitle"
                 type="text"
+                defaultValue={meeting.sacramentHymn.title}
                 aria-describedby="sacramentHymnTitle-error"
                 className="mt-1 w-full rounded-md border border-slate-300 px-3 py-2"
               />
             </div>
-          </div>
-          <div id="sacramentHymnNumber-error" aria-live="polite" className="mt-1 text-sm text-red-600">
-            {state.errors?.sacramentHymnNumber?.map((err) => <p key={err}>{err}</p>)}
-          </div>
-          <div id="sacramentHymnTitle-error" aria-live="polite" className="mt-1 text-sm text-red-600">
-            {state.errors?.sacramentHymnTitle?.map((err) => <p key={err}>{err}</p>)}
           </div>
         </fieldset>
 
@@ -179,6 +179,7 @@ export default function NewMeetingPage() {
                 id="closingHymnNumber"
                 name="closingHymnNumber"
                 type="number"
+                defaultValue={meeting.closingHymn.number}
                 aria-describedby="closingHymnNumber-error"
                 className="mt-1 w-full rounded-md border border-slate-300 px-3 py-2"
               />
@@ -191,16 +192,11 @@ export default function NewMeetingPage() {
                 id="closingHymnTitle"
                 name="closingHymnTitle"
                 type="text"
+                defaultValue={meeting.closingHymn.title}
                 aria-describedby="closingHymnTitle-error"
                 className="mt-1 w-full rounded-md border border-slate-300 px-3 py-2"
               />
             </div>
-          </div>
-          <div id="closingHymnNumber-error" aria-live="polite" className="mt-1 text-sm text-red-600">
-            {state.errors?.closingHymnNumber?.map((err) => <p key={err}>{err}</p>)}
-          </div>
-          <div id="closingHymnTitle-error" aria-live="polite" className="mt-1 text-sm text-red-600">
-            {state.errors?.closingHymnTitle?.map((err) => <p key={err}>{err}</p>)}
           </div>
         </fieldset>
 
@@ -212,6 +208,7 @@ export default function NewMeetingPage() {
             id="closingPrayer"
             name="closingPrayer"
             type="text"
+            defaultValue={meeting.closingPrayer}
             aria-describedby="closingPrayer-error"
             className="mt-1 w-full rounded-md border border-slate-300 px-3 py-2"
           />
@@ -221,7 +218,13 @@ export default function NewMeetingPage() {
         </div>
 
         <div className="flex items-center gap-2">
-          <input id="stakeBusiness" name="stakeBusiness" type="checkbox" className="h-4 w-4" />
+          <input
+            id="stakeBusiness"
+            name="stakeBusiness"
+            type="checkbox"
+            defaultChecked={meeting.stakeBusiness}
+            className="h-4 w-4"
+          />
           <label htmlFor="stakeBusiness" className="text-sm text-slate-700">
             Stake Business
           </label>
@@ -238,7 +241,7 @@ export default function NewMeetingPage() {
           disabled={isPending}
           className="rounded-md bg-blue-700 px-6 py-2.5 text-sm font-medium text-white hover:bg-blue-800 disabled:opacity-50"
         >
-          {isPending ? 'Creating…' : 'Create Meeting'}
+          {isPending ? 'Saving…' : 'Save Changes'}
         </button>
       </form>
     </div>

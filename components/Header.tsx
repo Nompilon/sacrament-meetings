@@ -13,7 +13,7 @@ export default function Header() {
         {/* Left side - Name */}
         <Link
           href="/"
-          className="flex items-center gap-3 text-xl font-bold hover:text-blue-400"
+          className="flex items-center gap-3 text-xl font-bold hover:text-blue-300"
         >
           <Image
             src="/nompilo.webp"
@@ -30,8 +30,10 @@ export default function Header() {
         <div className="flex gap-6">
           <Link
             href="/"
-            className={`hover:text-blue-400 ${
-              pathname === "/" ? "font-bold text-blue-400" : ""
+            className={`hover:text-blue-300 ${
+              pathname === "/"
+                ? "font-bold text-white underline underline-offset-4"
+                : "text-slate-200"
             }`}
           >
             Home
@@ -39,10 +41,10 @@ export default function Header() {
 
           <Link
             href="/meetings"
-            className={`hover:text-blue-400 ${
+            className={`hover:text-blue-300 ${
               pathname.startsWith("/meetings") && pathname !== "/meetings/current"
-                ? "font-bold text-blue-400"
-                : ""
+                ? "font-bold text-white underline underline-offset-4"
+                : "text-slate-200"
             }`}
           >
             Meetings
