@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Inter, Merriweather } from 'next/font/google';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -11,10 +11,23 @@ const merriweather = Merriweather({
   variable: '--font-merriweather',
 });
 
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+};
+
 export const metadata: Metadata = {
   metadataBase: new URL('https://sacrament-meetings-rust.vercel.app/'),
-  title: 'Sacrament Meeting Planner',
+  title: {
+    default: 'Sacrament Meeting Planner',
+    template: '%s | Sacrament Meeting Planner',
+  },
   description: 'Plan, manage, and print sacrament meeting programs.',
+   openGraph: {
+    title: 'Sacrament Meeting Planner',
+    description: 'Plan, manage, and print sacrament meeting programs for your ward.',
+    images: ['/meeting.webp'],
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

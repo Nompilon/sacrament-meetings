@@ -1,3 +1,12 @@
+import SignOutButton from '@/components/SignOutButton';
+
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
-  return <div className="mx-auto max-w-4xl px-4 py-8">{children}</div>;
+  return (
+    <div className="mx-auto max-w-4xl px-4 py-8">
+      <div className="mb-4 flex justify-end">
+        <SignOutButton />
+      </div>
+      {children}
+    </div>
+  );
 }

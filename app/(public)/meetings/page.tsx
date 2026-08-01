@@ -1,6 +1,18 @@
 import { getMeetings, getMeetingsTotalPages } from '@/lib/meetings-db';
 import { MeetingSearch } from '@/components/MeetingSearch';
 import MeetingCard from '@/components/MeetingCard';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'All Meetings',
+  description: 'Browse and search all sacrament meeting programs by date, presiding officer, or speaker.',
+  openGraph: {
+    title: 'All Meetings — Sacrament Meeting Planner',
+    description: 'Browse and search all sacrament meeting programs.',
+    images: ['/meeting.webp'],
+  },
+};
+
 import { Pagination } from '@/components/Pagination';
 
 export default async function MeetingsPage(props: {
